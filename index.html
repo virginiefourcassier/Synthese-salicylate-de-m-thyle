@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Transformation chimique – Modélisation (Seconde)</title>
+  <style>
+    html, body {
+      height:100%;
+      margin:0;
+      background:#e9eaee; /* fond page gris clair */
+      color:#1b1f2a;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .wrap { min-height:100%; display:flex; align-items:center; justify-content:center; padding:16px; box-sizing:border-box; }
+    .panel { width: 980px; max-width: 98vw; }
+    .bar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; padding:10px 12px; border-radius:12px;
+      background:#f6f7f9;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      margin-bottom:10px;
+      user-select:none;
+      flex-wrap:wrap;
+    }
+    .left { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .pill { padding:6px 10px; border-radius:999px; background:#eef0f5; font-size:14px; color:#1b1f2a; }
+    .controls { display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:flex-end; }
+    .slider {
+      display:flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:12px; background:#eef0f5;
+    }
+    .slider label { font-size:13px; font-weight:700; }
+    .slider input[type="range"] { width:160px; }
+    .slider .val { min-width:26px; text-align:right; font-variant-numeric: tabular-nums; font-weight:700; }
+
+    button {
+      cursor:pointer; border:0; border-radius:10px; padding:8px 12px;
+      background:#1b2a5a; color:#fff; font-weight:700;
+    }
+    button:hover { filter: brightness(1.06); }
+
+    canvas{
+      width: 980px; height: 620px; max-width: 98vw; max-height: 70vh;
+      border-radius:16px; display:block;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(0,0,0,0.04), rgba(0,0,0,0)),
+                  radial-gradient(900px 700px at 80% 30%, rgba(0,0,0,0.03), rgba(0,0,0,0)),
+                  #f0f1f4; /* fond canvas gris clair */
+      box-shadow: 0 16px 34px rgba(0,0,0,0.18);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <div class="bar">
+        <div class="left">
+          <span class="pill">Seconde • Réaction 1:1 (non affichée)</span>
+          <span class="pill">Comptages visibles ✅</span>
+          <span class="pill">Mode diagnostic: <span id="diagState">OFF</span></span>
+        </div>
+
+        <div class="controls">
+          <div class="slider" title="Quantité initiale d'acide salicylique">
+            <label for="saRange">SA</label>
+            <input id="saRange" type="range" min="0" max="30" step="1" value="12" />
+            <span class="val" id="saVal">12</span>
+          </div>
+
+          <div class="slider" title="Quantité initiale de méthanol">
+            <label for="meRange">MeOH</label>
+            <input id="meRange" type="range" min="0" max="30" step="1" value="12" />
+            <span class="val" id="meVal">12</span>
+          </div>
+
+          <button id="btnLabels">🔤 Afficher symboles</button>
+          <button id="btnPause">⏸ Pause</button>
+          <button id="btnReset">↻ Reset</button>
+        </div>
+      </div>
+
+      <canvas id="c" width="980" height="620" aria-label="Animation"></canvas>
+    </div>
+  </div>
+
+  <!-- ⚠️ Incrémente v=1 à chaque mise à jour pour forcer le rafraîchissement -->
+  <script src="app.js?v=1"></script>
+</body>
+</html>
